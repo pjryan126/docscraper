@@ -1,4 +1,4 @@
-[![Travis](https://travis-ci.com/pjryan126/docscraper.svg?branch=master)](https://travis-ci.com/pjryan126/docscraper.svg?branch=master)
+[![Travis](https://travis-ci.com/pjryan126/docscraper.svg?branch=main)](https://travis-ci.com/pjryan126/docscraper.svg?branch=main)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/pjryan126/docscraper.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/pjryan126/docscraper/alerts/) 
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/pjryan126/docscraper.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/pjryan126/docscraper/context:python)
 
