@@ -14,7 +14,9 @@ setup(
     author_email='pryan@stoneturn.com',
     license='MIT',
     install_requires=[
+        'cython',
         'openpyxl',
+        'numpy',
         'pandas',
         'scrapy',
     ],
