@@ -8,11 +8,13 @@ python:
   - "3.9"
   - "3.9-dev"
 # command to install dependencies
-install:
+before_install:
+  - python --version
   - sudo pip install -U pip
-  - sudo pip install openpyxl
-  - sudo pip install pandas
-  - sudo pip install scrapy
+  - sudo pip install -U openpyxl
+  - sudo pip install -U pandas
+  - sudo pip install -U scrapy
+install:
   - python setup.py -q install
 # command to run tests
 script:
