@@ -11,6 +11,7 @@ before_install:
   - pip install -U pip
   - pip install cython
   - pip install pyasn1
+  - pip install attrs>=19.2.0
 install:
   - python setup.py -q install
 # command to run tests
