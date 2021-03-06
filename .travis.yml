@@ -10,6 +10,7 @@ before_install:
   - python --version
   - pip install -U pip
   - pip install cython
+  - pip install pyasn1
 install:
   - python setup.py -q install
 # command to run tests
