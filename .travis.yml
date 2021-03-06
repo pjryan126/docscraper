@@ -11,9 +11,6 @@ python:
 before_install:
   - python --version
   - sudo pip install -U pip
-  - sudo pip install -U openpyxl
-  - sudo pip install -U pandas
-  - sudo pip install -U scrapy
 install:
   - python setup.py -q install
 # command to run tests
