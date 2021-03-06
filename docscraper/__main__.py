@@ -1,5 +1,5 @@
 import argparse
-from .spider import crawl
+from spider import crawl
 
 
 def parse_arguments():

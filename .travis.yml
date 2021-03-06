@@ -10,6 +10,7 @@ python:
 before_install:
   - python --version
   - sudo pip install -U pip
+  - sudo pip install cython
 install:
   - python setup.py -q install
 # command to run tests
