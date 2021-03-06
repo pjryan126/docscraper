@@ -20,13 +20,10 @@ Once the package is installed, you can use it with scrapy directly in your
 Python script to download files from websites as follows:
 
 ```
->>> from doccrawler import DocSpider
->>> from scrapy.crawler import CrawlerProcess
+>>> import docscraper
 >>> allowed_domains = ["books.toscrape.com"]
 >>> start_urls = ["https://books.toscrape.com"]
 >>> extensions = [".html", ".pdf", ".docx", ".doc", ".svg"]
->>> process = CrawlerProcess()
->>> process.crawl(DocSpider, allowed_domains, start_urls, extensions=extensions)
->>> process.start()
+>>> docscraper.crawl(allowed_domains, start_urls, extensions=extensions)
 ```
 
