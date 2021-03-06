@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='docscraper',
-    version='0.1.3',
+    version='0.1.4',
     description='a web crawler to scrape documents from websites',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -15,7 +15,7 @@ setup(
     license='MIT',
     install_requires=[
         'openpyxl',
-        'numpy',
+        'numpy>=1.16.5 ',
         'pandas',
         'scrapy',
     ],
