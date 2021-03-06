@@ -1,4 +1,3 @@
-sudo: required
 language: python
 python:
   - "3.6"
@@ -9,8 +8,7 @@ python:
 # command to install dependencies
 before_install:
   - python --version
-  - sudo pip install -U pip
-  - sudo pip install cython
+  - pip install -U pip
 install:
   - python setup.py -q install
 # command to run tests
