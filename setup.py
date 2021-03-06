@@ -15,7 +15,7 @@ setup(
     license='MIT',
     install_requires=[
         'openpyxl',
-        'numpy>=1.16.5 ',
+        'numpy>=1.16.5',
         'pandas',
         'scrapy',
     ],
