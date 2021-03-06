@@ -9,7 +9,7 @@ from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 
 
-class DocLinkExtractor(LinkExtractor):
+class DocLinkExtractor(LinkExtractor):  # lgtm [py/missing-call-to-init]
 
     def __init__(self, extensions, *args, **kwargs):
         """ Custom link extractor to extract document links.
