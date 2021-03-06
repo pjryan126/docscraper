@@ -2,7 +2,7 @@ import os
 import shutil
 from unittest import main
 
-from docscraper.main import DocLinkExtractor, crawl
+from docscraper.spider import DocLinkExtractor, crawl
 import pandas as pd
 
 from .base import BaseTestCase

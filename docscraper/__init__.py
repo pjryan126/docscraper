@@ -1,1 +1,1 @@
-from .main import DocSpider, crawl
+from .spider import DocSpider, crawl
