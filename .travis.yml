@@ -9,6 +9,7 @@ python:
   - "3.9-dev"
 # command to install dependencies
 install:
+  - sudo pip install -U pip
   - sudo pip install openpyxl
   - sudo pip install pandas
   - sudo pip install scrapy
