@@ -1,9 +1,8 @@
 import os
 import shutil
 from unittest import main
-from scrapy.crawler import CrawlerProcess
 
-from docscraper.spiders import DocLinkExtractor, DocSpider
+from docscraper.main import DocLinkExtractor, crawl
 import pandas as pd
 
 from .base import BaseTestCase
@@ -30,14 +29,10 @@ class TestDocSpider(BaseTestCase):
     def setUpClass(cls):
         """ Run crawl only once for all test cases in the class. """
         super(TestDocSpider, cls).setUpClass()
-        process = CrawlerProcess()
-        process.crawl(DocSpider,
-                      cls.NAME,
-                      cls.ALLOWED_DOMAINS,
-                      cls.START_URLS,
-                      cls.DIRECTORY,
-                      extensions=cls.EXTENSIONS)
-        process.start()
+        crawl(cls.ALLOWED_DOMAINS,
+              cls.START_URLS,
+              directory=cls.DIRECTORY,
+              extensions=cls.EXTENSIONS)
 
     @classmethod
     def tearDownClass(cls):

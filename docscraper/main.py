@@ -4,6 +4,7 @@ from urllib.parse import urlparse
 from uuid import uuid4
 
 import pandas as pd
+from scrapy.crawler import CrawlerProcess
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 
@@ -26,13 +27,12 @@ class DocLinkExtractor(LinkExtractor):
 
 class DocSpider(CrawlSpider):
 
-    def __init__(self, name, allowed_domains, start_urls,
-                 directory='./output', extensions=['.pdf', '.doc', '.docx'],
-                 **kwargs):
+    name = "DocScraper"
+
+    def __init__(self, allowed_domains, start_urls, directory='./output',
+                 extensions=['.pdf', '.doc', '.docx'], **kwargs):
         """ The Spider to crawl site(s) for documents.
 
-        :param name: The name of the spider
-        :type name: str
         :param allowed_domains: A list of allowed domains for the crawl
         :type allowed_domains: list
         :param start_urls: A list of the start urls for the crawl
@@ -45,7 +45,6 @@ class DocSpider(CrawlSpider):
 
         """
 
-        self.name = name
         self.files = []
         self.allowed_domains = allowed_domains
         self.start_urls = start_urls
@@ -93,3 +92,11 @@ class DocSpider(CrawlSpider):
         """ Save a MS Excel file listing document when crawl ends. """
         df = pd.DataFrame().from_records(self.files)
         df.to_excel("{}/file-listing.xlsx".format(self.directory), index=False)
+
+
+def crawl(allowed_domains, start_urls, directory="./output",
+          extensions=[".pdf", ".docx", ".doc"]):
+    process = CrawlerProcess()
+    process.crawl(DocSpider, allowed_domains, start_urls,
+                  directory=directory, extensions=extensions)
+    process.start()
