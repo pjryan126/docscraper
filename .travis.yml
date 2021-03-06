@@ -1,7 +1,5 @@
 language: python
 python:
-  - "3.6"
-  - "3.7"
   - "3.8"
   - "3.9"
   - "3.9-dev"
@@ -11,7 +9,6 @@ before_install:
   - pip install -U pip
   - pip install cython
   - pip install pyasn1
-  - pip install attrs>=19.2.0
 install:
   - python setup.py -q install
 # command to run tests
