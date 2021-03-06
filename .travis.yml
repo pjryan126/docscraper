@@ -16,4 +16,4 @@ script:
   - pytest
 branches:
   only:
-    - master
+    - main
