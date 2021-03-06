@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='docscraper',
-    version='0.1.0',
+    version='0.1.1',
     description='a web crawler to scrape documents from websites',
     long_description=long_description,
     long_description_content_type="text/markdown",
