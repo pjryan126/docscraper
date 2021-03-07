@@ -69,7 +69,7 @@ class DocSpider(CrawlSpider):
             timestamp = datetime.now()
 
             domain = urlparse(url).netloc
-            filename = "{}-DOC-{}{}".format(filename, uuid4()[:8], ext)
+            filename = "{}-DOC-{}{}".format(filename, str(uuid4())[:8], ext)
             relative_path = "/".join([domain, filename])
 
             self.logger.info("Saving file {}".format(url))
