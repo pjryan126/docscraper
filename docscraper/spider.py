@@ -66,10 +66,10 @@ class DocSpider(CrawlSpider):
         filename, ext = os.path.splitext(f)
         if ext in self.extensions:
             url = response.url
-            timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+            timestamp = datetime.now()
 
             domain = urlparse(url).netloc
-            filename = "{}-ST-{}{}".format(filename, uuid4(), ext)
+            filename = "{}-DOC-{}{}".format(filename, uuid4()[:8], ext)
             relative_path = "/".join([domain, filename])
 
             self.logger.info("Saving file {}".format(url))
