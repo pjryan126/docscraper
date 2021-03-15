@@ -1,5 +1,6 @@
+#!/usr/bin/env python3
 import argparse
-from spider import crawl
+from .api import crawl
 
 
 def parse_arguments():
