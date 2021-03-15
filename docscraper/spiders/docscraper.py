@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 import logging
 import os
 import re
-from urllib.parse import urlparse, quote_plus
+from urllib.parse import urlparse
 
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
