@@ -12,9 +12,3 @@ before_install:
   - pip install scrapy
 install:
   - python setup.py -q install
-# command to run tests
-script:
-  - pytest
-branches:
-  only:
-    - main
