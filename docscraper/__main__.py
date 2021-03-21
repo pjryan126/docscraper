@@ -1,5 +1,6 @@
+#!/usr/bin/env python3
 import argparse
-from spider import crawl
+from .api import crawl
 
 
 def parse_arguments():
@@ -12,17 +13,20 @@ def parse_arguments():
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("-a", "--allowed_domains", nargs="+",
-                        help="one or more allowed domains", required=True)
+    parser.add_argument('-d', '--domains', nargs='+',
+                        help='one or more allowed domains', required=True)
 
-    parser.add_argument("-s", "--start_urls", nargs="+",
-                        help="one or more start urls", required=True)
+    parser.add_argument('-s', '--start_urls', nargs='+',
+                        help='one or more start urls', required=True)
 
-    parser.add_argument("-d", "--directory", help="directory path for output.",
-                        default="./output")
+    parser.add_argument('-o', '--outpath', help='directory path for output.',
+                        default='./output')
 
-    parser.add_argument("-e", "--extensions", nargs="*",
-                        help="one or more document extensions (e.g., '.pdf')")
+    parser.add_argument('-e', '--extensions', nargs='*',
+                        help='one or more document extensions (e.g., ".pdf")')
+
+    parser.add_argument('-t', '--times', nargs='?',
+                        help='one or two timestamps in YYYYmmddHHMMSS format')
 
     args = parser.parse_args()
 
@@ -36,6 +40,11 @@ if __name__ == "__main__":
     if args.extensions is None:
         args.extensions = ['.pdf', '.doc', '.docx']
 
-    crawl(args.allowed_domains, args.start_urls,
-          args.directory, args.extensions)
+    if len(args.times) == 1:
+        args.times = args.times[0]
+    elif len(args.times) > 2:
+        raise argparse.ArgumentError("Too many timestamp values")
+
+    crawl(args.domains, args.start_urls,
+          args.outpath, args.extensions, args.times)
 
