@@ -4,6 +4,11 @@ from .api import crawl
 
 
 def check_times(t):
+    """ Check time range to confirm 1 or 2 values provided.
+
+    :param t: time range tuple
+    :type t: tuple
+    """
     if 1 > len(t) > 2:
         raise argparse.ArgumentTypeError('Times should have at least 1 '
                                          'argument but not more than 2.')
