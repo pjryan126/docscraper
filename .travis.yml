@@ -9,6 +9,7 @@ before_install:
   - pip install -U pip
   - pip install cython
   - pip install pyasn1
+  - pip install scrapy
 install:
   - python setup.py -q install
 # command to run tests
