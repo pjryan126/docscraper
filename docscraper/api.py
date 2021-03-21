@@ -5,8 +5,8 @@ from .spiders.docscraper import DocScraperSpider
 
 
 def crawl(domains,
-          directory='./output',
           start_urls=[],
+          directory='./output',
           extensions=['.pdf', '.docx', '.doc', '.txt'],
           robotstxt_obey=True,
           download_delay=0,

@@ -86,7 +86,7 @@ class DocScraperSpider(CrawlSpider):
             bare_domain = unqualified_url.split('/')[0]
             self.allowed_domains.append(bare_domain)
             if len(start_urls) == 0 and bare_domain != 'web.archive.org':
-                self.start_urls.append(full_url)
+                self.start_urls.append(full_url) # lgtm [py/modification-of-default-value]
 
         super(DocScraperSpider, self).__init__(**kwargs)
 

@@ -30,7 +30,7 @@ class FileListingPipeline(object):
             with open(outfile, 'wb') as f:
                 f.write(r.content)
             item['files'] = [{'url': r.url,
-                              'path': 'full{}'.format(fname),
+                              'path': 'full/{}'.format(fname),
                               'checksum': hashlib.md5(r.content).hexdigest(),
                               'status': r.status_code}]
 

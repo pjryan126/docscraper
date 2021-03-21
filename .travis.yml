@@ -9,11 +9,12 @@ before_install:
   - pip install -U pip
   - pip install cython
   - pip install pyasn1
+  - pip install scrapy
 install:
   - python setup.py -q install
 # command to run tests
 script:
-  - pytest
+  - python -m unittest tests.test_api.TestCrawlTimeRange
 branches:
   only:
     - main
