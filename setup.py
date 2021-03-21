@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='docscraper',
-    version='1.0.1',
+    version='2.0.0',
     description='A web crawler to scrape documents from websites',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -18,6 +18,7 @@ setup(
         'numpy>=1.16.5',
         'pandas',
         'scrapy',
+        'scrapy-wayback-machine'
     ],
     packages=[
         'docscraper',

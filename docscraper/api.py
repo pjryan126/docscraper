@@ -4,16 +4,17 @@ from scrapy.utils.project import get_project_settings
 from .spiders.docscraper import DocScraperSpider
 
 
-def crawl(allowed_domains,
+def crawl(domains,
           directory='./output',
+          start_urls=[],
           extensions=['.pdf', '.docx', '.doc', '.txt'],
           robotstxt_obey=True,
           download_delay=0,
           time_range=None):
     """ Run the crawler from a Python script.
 
-    :param allowed_domains: the domains allowed to be crawled
-    :type allowed_domains: list
+    :param domains: the domains allowed to be crawled
+    :type domains: list
     :param directory: the output directory for downloaded files
     :type directory: str
     :param extensions: the document extension types to download
@@ -47,7 +48,8 @@ def crawl(allowed_domains,
 
     process = CrawlerProcess(settings)
     process.crawl(DocScraperSpider,
-                  allowed_domains,
+                  domains,
+                  start_urls,
                   directory=directory,
                   extensions=extensions,
                   time_range=time_range

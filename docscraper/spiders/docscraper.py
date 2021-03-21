@@ -41,14 +41,15 @@ class DocScraperSpider(CrawlSpider):
 
     def __init__(self,
                  domains,
+                 start_urls=[],
                  directory='./output',
                  extensions=['.pdf', '.doc', '.docx'],
                  time_range=None,
                  **kwargs):
         """ The Spider to crawl site(s) for documents.
 
-        :param allowed_domains: A list of allowed domains for the crawl
-        :type allowed_domains: list
+        :param domains: A list of allowed domains for the crawl
+        :type domains: list
         :param start_urls: A list of the start urls for the crawl
         :type start_urls: list
         :param directory: The directory path to which to save documents
@@ -56,6 +57,8 @@ class DocScraperSpider(CrawlSpider):
         :param extensions: A list of document extensions
                            (e.g., [".pdf", ".doc", ".docx"])
         :type extensions: list, optional
+        :param time_range: A tuple of datetime values or YYYYmmddHHMMSS strings
+        :param time_range: 2-value tuple
 
         """
 
@@ -72,7 +75,7 @@ class DocScraperSpider(CrawlSpider):
         )
         # parse the allowed domains and start urls
         self.allowed_domains = []
-        self.start_urls = []
+        self.start_urls = start_urls
         if self.time_range is not None:
             domains.append('web.archive.org')
         for domain in domains:
@@ -82,14 +85,23 @@ class DocScraperSpider(CrawlSpider):
             full_url = '{0}://{1}'.format(url_scheme, unqualified_url)
             bare_domain = unqualified_url.split('/')[0]
             self.allowed_domains.append(bare_domain)
-            if bare_domain != 'web.archive.org':
+            if len(start_urls) == 0 and bare_domain != 'web.archive.org':
                 self.start_urls.append(full_url)
 
         super(DocScraperSpider, self).__init__(**kwargs)
 
         self.check_directory(self.directory)
 
-    def set_time_range(self, time_range):
+    def parse_start_url(self, response):
+        # scrapy doesn't call the callbacks for the start urls by default,
+        # this overrides that behavior so that any matching callbacks are called
+        for rule in self._rules:
+            if rule.link_extractor._link_allowed(response):
+                if rule.callback:
+                    rule.callback(response)
+
+    @staticmethod
+    def set_time_range(time_range):
         if time_range is None:
             return None
 
@@ -111,14 +123,6 @@ class DocScraperSpider(CrawlSpider):
             return time.timestamp()
 
         return [parse_time(time) for time in time_range]
-
-    def parse_start_url(self, response):
-        # scrapy doesn't call the callbacks for the start urls by default,
-        # this overrides that behavior so that any matching callbacks are called
-        for rule in self._rules:
-            if rule.link_extractor._link_allowed(response):
-                if rule.callback:
-                    rule.callback(response)
 
     @staticmethod
     def check_directory(directory):
