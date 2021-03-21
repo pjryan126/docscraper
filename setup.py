@@ -17,6 +17,7 @@ setup(
         'openpyxl',
         'numpy>=1.16.5',
         'pandas',
+        'requests',
         'scrapy',
         'scrapy-wayback-machine'
     ],
