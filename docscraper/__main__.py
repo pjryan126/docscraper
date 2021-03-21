@@ -3,6 +3,13 @@ import argparse
 from .api import crawl
 
 
+def check_times(t):
+    if 1 > len(t) > 2:
+        raise argparse.ArgumentTypeError('Times should have at least 1 '
+                                         'argument but not more than 2.')
+    return
+
+
 def parse_arguments():
     """ Parse and return command-line arguments.
     :return: An argparse namespace object containing the command-line
@@ -26,12 +33,10 @@ def parse_arguments():
                         help='one or more document extensions (e.g., ".pdf")')
 
     parser.add_argument('-t', '--times', nargs='?',
+                        type=check_times,
                         help='one or two timestamps in YYYYmmddHHMMSS format')
 
     args = parser.parse_args()
-
-    if len(args.times) > 2:
-        raise parser.error("Too many timestamp values")
 
     return args
 
