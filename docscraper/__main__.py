@@ -30,6 +30,9 @@ def parse_arguments():
 
     args = parser.parse_args()
 
+    if len(args.times) > 2:
+        raise parser.error("Too many timestamp values")
+
     return args
 
 
@@ -42,8 +45,6 @@ if __name__ == "__main__":
 
     if len(args.times) == 1:
         args.times = args.times[0]
-    elif len(args.times) > 2:
-        raise argparse.ArgumentError("Too many timestamp values")
 
     crawl(args.domains, args.start_urls,
           args.outpath, args.extensions, args.times)
