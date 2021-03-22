@@ -4,6 +4,7 @@ import os
 import re
 from urllib.parse import urlparse
 
+import pandas as pd
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.utils.log import configure_logging
@@ -31,6 +32,7 @@ class DocScraperSpider(CrawlSpider):
 
     name = "DocScraperSpider"
     handle_httpstatus_list = [404]
+    doc_references = []
 
     configure_logging(install_root_handler=False)
     logging.basicConfig(
@@ -138,20 +140,22 @@ class DocScraperSpider(CrawlSpider):
         This method prevents the scraper from expanding its search beyond the
         scope of the project.
         """
+
         domains = [d for d in self.allowed_domains if d != 'web.archive.org']
-        domains = '^https?\://(?:%s)' % '|'.join(domains)
+        domains = '|'.join(domains)
+
         allowed_links = []
         for link in links:
-            link.url = re.split('/web/(\d{14})/', link.url)[-1]
-            if re.match(domains, link.url) and 'screenshot' not in link.url:
+            link.url = re.split('^https?://web.archive.org/web/(\d{14})/',
+                                link.url)[-1]
+            if re.search(domains, link.url) and 'screenshot' not in link.url:
                 allowed_links.append(link)
+
         return allowed_links
 
     def parse_item(self, response):
         """ Download document and save metadata to files attribute. """
 
-        if response.status == 404:
-            return
 
         item = DocscraperItem()
 
@@ -169,8 +173,20 @@ class DocScraperSpider(CrawlSpider):
             item['url_date'] = timestamp
             item['file_urls'] = [url]
 
+            self.doc_references.append(item)
+
+            if response.status == 404:
+                return
+
             yield item
 
+    def closed(self, reason):
+        """ Save a MS Excel document listing all references to documents. """
+        os.makedirs(self.directory, exist_ok=True)
+        df = pd.DataFrame().from_records(self.doc_references)
+        df.to_csv("{}/doc-references.csv".format(self.directory),
+                    index=False)
+        return
 
 
 
