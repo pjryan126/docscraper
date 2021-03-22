@@ -1,7 +1,7 @@
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 
-from docscraper.spiders import DocScraperSpider
+from .spiders import DocScraperSpider
 
 
 def crawl(domains,
