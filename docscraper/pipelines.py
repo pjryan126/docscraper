@@ -1,5 +1,6 @@
 import hashlib
 import os
+import re
 
 import requests
 from scrapy.utils.python import to_bytes
@@ -20,7 +21,8 @@ class FileListingPipeline(object):
         item['url'] = item['file_urls'][0]
 
         if len(item['files']) == 0:
-            r = requests.get(item['url'])
+            url = re.sub(r'(\d{14})', r'\1if_', item['url'])
+            r = requests.get(url)
             media_guid = hashlib.sha1(to_bytes(item['url'])).hexdigest()
             f, ext = os.path.splitext(item['url'])
             fname = '{}{}'.format(media_guid, ext)

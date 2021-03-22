@@ -1,11 +1,11 @@
-from setuptools import setup
+from setuptools import find_packages, setup
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
     name='docscraper',
-    version='2.0.1',
+    version='2.0.7',
     description='A web crawler to scrape documents from websites',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -21,9 +21,7 @@ setup(
         'scrapy',
         'scrapy-wayback-machine'
     ],
-    packages=[
-        'docscraper',
-    ],
+    packages=find_packages(),
     test_suite='tests',
     zip_safe=False,
 )
